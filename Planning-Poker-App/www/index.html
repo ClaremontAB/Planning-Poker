@@ -16,6 +16,36 @@
   <script src="/components/steroids-js/steroids.js"></script>
 
   <script src="/javascripts/application.js"></script>
+  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script> 
+  <script src="/javascripts/countly.js"></script>
+
+    <script type="text/javascript">
+        // Wait for PhoneGap to load
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        // PhoneGap is ready
+        function onDeviceReady() 
+        {
+            Countly.Init(
+                "http://stats.getmemry.com",
+                "f8ce0cc9ba0b9f30116e957c1855c1eb88ee2d35",
+                "0.1",
+                device.uuid);
+
+            document.addEventListener("visibilitychange", SendDemoEvent, false);
+
+            function SendDemoEvent()
+            {
+                var demoEvent = new CountlyEvent();
+                demoEvent.Key = "Title";
+                demoEvent.Title = "index";
+                demoEvent.UsingSegmentation = true;
+                            
+                Countly.PostEvent(demoEvent);
+            }
+        }
+    </script>
+    
 </head>
 <body class="content">
   <div class="padding">
